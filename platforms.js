@@ -13,12 +13,12 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('sky', 'assets/background.png');
+    this.load.image('sky', 'background.png');
 }
 
 function create ()
 {
-    this.add.image(400, 300, 'sky');
+    this.add.image(400, 300, 'sky').size(600,800);
 
 }
 
