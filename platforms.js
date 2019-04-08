@@ -22,11 +22,12 @@ var platforms;
 function preload ()
 {
     this.load.image('sky', 'background.png');
+    this.load.image('ground', 'platform.png');
 }
 
 function create ()
 {
-    this.add.image(400, 300, 'sky');
+    this.add.image(400, 300, 'sky').setScale(3);
 
     platforms = this.physics.add.staticGroup();
 
