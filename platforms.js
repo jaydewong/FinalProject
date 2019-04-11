@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: false
+            debug: true
         }
     },
     scene: {
@@ -28,7 +28,7 @@ function preload ()
 {
     this.load.image('sky', 'background.png');
     this.load.image('ground', 'whiteground.png');
-    this.load.image('player', 'pusheen.gif');
+    this.load.image('player', 'pusheen1.gif');
     
 }
 
@@ -37,7 +37,7 @@ function create ()
     this.add.image(400, 300, 'sky').setScale(3);
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 568, 'ground').setScale(4).refreshBody();
+    platforms.create(400, 568, 'ground').refreshBody();
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
     platforms.create(750, 220, 'ground');
