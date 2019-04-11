@@ -45,12 +45,13 @@ function create ()
     player = this.physics.add.sprite(100,490,'player');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    player.body.setGravityY(200);
+    player.body.setGravityY(400);
 
 
     cursors = this.input.keyboard.createCursorKeys();
 
     this.physics.add.collider(player, platforms);
+
 }
 
 function generatePlatforms(){
@@ -74,8 +75,8 @@ function update ()
 
         }
 
-        if (cursors.up.isDown && player.body.touching.down)
+        if (cursors.up.isDown) //&& if player.body.touching.down
         {
-            player.setVelocityY(-330);
+            player.setVelocityY(-250);
         }
 }
