@@ -19,6 +19,9 @@ var config = {
 
 
 var game = new Phaser.Game(config);
+var anim;
+var progress;
+var frameView;
 var platforms;
 var player;
 var cursors;
@@ -28,11 +31,23 @@ function preload ()
 {
     this.load.image('sky', 'background.png');
     this.load.image('ground', 'fixedground.png');
-    this.load.image('player', 'pusheen1.gif');
-    
+    this.load.spritesheet('player', 'Pusheen1.png', { frameWidth: 46, frameHeight: 28 });
 }
 
+function updateFrameView ()
+{
+    frameView.clear();
+    frameView.fillRect(player.frame.cutX, 0, 46, 28);
+}
+
+function update ()
+{
+    updateFrameView();
+}
+
+
 function create ()
+
 {   
     this.add.image(400, 300, 'sky').setScale(3);
     platforms = this.physics.add.staticGroup();
@@ -52,6 +67,19 @@ function create ()
 
     this.physics.add.collider(player, platforms);
 
+    this.anims.create({
+        key: 'walk',
+        frames: this.anims.generateFrameNumbers('player'),
+        frameRate: 18,
+        yoyo: true,
+        repeat: -1
+    });
+    
+    this.anims.create({
+        key: 'idle',
+        frames: [{ key: 'player', frame: 0}],
+        frameRate: 18,
+    });
 }
 
 function generatePlatforms(){
@@ -63,16 +91,18 @@ function update ()
     if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
+            player.anims.play('walk', true);
         }
         else if (cursors.right.isDown)
         {
             player.setVelocityX(160);
+            player.anims.play('walk', true);
 
         }
         else
         {
             player.setVelocityX(0);
-
+            player.anims.play('idle');
         }
 
         if (cursors.up.isDown) //&& if player.body.touching.down
