@@ -5,7 +5,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            // gravity: { y: 300 },
+            gravity: { y: 300 },
             debug: true
         }
     },
@@ -55,31 +55,19 @@ function update ()
 function create ()
 
 {   
-    boards = this.add.group(); //trying to do a group with a for loop?? it didnt work 
-
     this.add.image(400, 300, 'sky').setScale(3);
-    // platforms = this.physics.add.staticGroup();
 
     coins = this.physics.add.staticGroup();
 
-    // var x = 100;
-    // for(var i = 0; i < 4; i ++){
-    //     platforms = this.physics.add.sprite(x,Math.random()*600, 'ground');
-    //     boards.add(platforms);
-    //     x += 100;
-    // }
+    platforms = this.physics.add.group({
+        gravityY:-300,
+        velocityX: -200,
+        'immovable': true,
 
-    platforms = this.physics.add.sprite(600,400, 'ground');
-    platform1 = this.physics.add.sprite(800,400, 'ground');
-    platforms.body.immovable = true;
-    platform1.body.immovable = true;
-    boards.add(platforms);
-    boards.add(platform1);
-
-    // platforms.create(400, 560, 'ground').setScale(4).refreshBody();
-    // platforms.create(600, 400, 'ground');
-    // platforms.create(50, 250, 'ground');
-    // platforms.create(750, 220, 'ground');
+    });
+    platforms.create(600, 500, 'ground');
+    platforms.create(200, 350, 'ground');
+    platforms.create(850, 420, 'ground');
     
     coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
     coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
@@ -94,7 +82,7 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    this.physics.add.collider(player, boards);
+    this.physics.add.collider(player, platforms);
 
     this.anims.create({
         key: 'walk',
@@ -142,14 +130,17 @@ function update ()
             player.anims.play('idle');
         }
 
-        if (cursors.up.isDown) //&& if player.body.touching.down
+        if (cursors.up.isDown)
         {
             player.setVelocityY(-250);
         }
 
-    if(2 > 0 == true){
-        platforms.x -= 3;
         
+    for(var i = 0; i < platforms.children.length; i++){
+        if(platforms.children[i].x < 0){
+            platforms.children[i].x = game.width;
+        }
     }
-
+    
+    
 }
