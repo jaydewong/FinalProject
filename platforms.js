@@ -55,19 +55,26 @@ function update ()
 function create ()
 
 {   
-    boards = this.add.group();
+    boards = this.add.group(); //trying to do a group with a for loop?? it didnt work 
 
     this.add.image(400, 300, 'sky').setScale(3);
     // platforms = this.physics.add.staticGroup();
-    // platforms = this.physics.add.sprite(pX,pY, 'ground');
+
     coins = this.physics.add.staticGroup();
 
-    // boards.add(platforms);
-    for(var i = 0; i < 4; i  ++){
-        platforms = this.physics.add.sprite(Math.random()*800,Math.random()*600 + 200, 'ground');
-        boards.add(platforms);
-        
-    }
+    // var x = 100;
+    // for(var i = 0; i < 4; i ++){
+    //     platforms = this.physics.add.sprite(x,Math.random()*600, 'ground');
+    //     boards.add(platforms);
+    //     x += 100;
+    // }
+
+    platforms = this.physics.add.sprite(600,400, 'ground');
+    platform1 = this.physics.add.sprite(800,400, 'ground');
+    platforms.body.immovable = true;
+    platform1.body.immovable = true;
+    boards.add(platforms);
+    boards.add(platform1);
 
     // platforms.create(400, 560, 'ground').setScale(4).refreshBody();
     // platforms.create(600, 400, 'ground');
@@ -114,9 +121,6 @@ function create ()
     coins.playAnimation('spin');
 }
 
-function generatePlatforms(){
-    
-}
 
 function update ()
 {
@@ -145,6 +149,7 @@ function update ()
 
     if(2 > 0 == true){
         platforms.x -= 3;
+        
     }
 
 }
