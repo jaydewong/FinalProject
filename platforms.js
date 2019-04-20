@@ -5,8 +5,8 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
-            debug: false
+            // gravity: { y: 300 },
+            debug: true
         }
     },
     scene: {
@@ -26,6 +26,9 @@ var coins;
 var platforms;
 var player;
 var cursors;
+var pX = 600;
+var pY = 400;
+var boards; 
 
 
 function preload ()
@@ -52,14 +55,25 @@ function update ()
 function create ()
 
 {   
+    boards = this.add.group();
+
     this.add.image(400, 300, 'sky').setScale(3);
-    platforms = this.physics.add.staticGroup();
+    // platforms = this.physics.add.staticGroup();
+    // platforms = this.physics.add.sprite(pX,pY, 'ground');
     coins = this.physics.add.staticGroup();
 
-    platforms.create(400, 560, 'ground').setScale(4).refreshBody();
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
+    // boards.add(platforms);
+    for(var i = 0; i < 4; i  ++){
+        platforms = this.physics.add.sprite(Math.random()*800,Math.random()*600 + 200, 'ground');
+        boards.add(platforms);
+        
+    }
+
+    // platforms.create(400, 560, 'ground').setScale(4).refreshBody();
+    // platforms.create(600, 400, 'ground');
+    // platforms.create(50, 250, 'ground');
+    // platforms.create(750, 220, 'ground');
+    
     coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
     coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
     coins.create(50, 190, 'coin').setScale(1.5).refreshBody();;
@@ -73,7 +87,7 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    this.physics.add.collider(player, platforms,);
+    this.physics.add.collider(player, boards);
 
     this.anims.create({
         key: 'walk',
@@ -106,6 +120,7 @@ function generatePlatforms(){
 
 function update ()
 {
+    
     if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
@@ -127,4 +142,9 @@ function update ()
         {
             player.setVelocityY(-250);
         }
+
+    if(2 > 0 == true){
+        platforms.x -= 3;
+    }
+
 }
