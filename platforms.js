@@ -65,9 +65,10 @@ function create ()
         'immovable': true,
 
     });
-    platforms.create(600, 500, 'ground');
-    platforms.create(200, 350, 'ground');
-    platforms.create(850, 420, 'ground');
+    platforms.create(600, 500, 'ground').setScale(0.75);
+    platforms.create(200, 350, 'ground').setScale(0.75);
+    platforms.create(850, 420, 'ground').setScale(0.75);
+    platforms.create(400, 100, 'ground').setScale(0.75);
     
     coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
     coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
@@ -136,9 +137,10 @@ function update ()
         }
 
         
-    for(var i = 0; i < platforms.children.length; i++){
-        if(platforms.children[i].x < 0){
-            platforms.children[i].x = game.width;
+    for(var i = 0; i < platforms.children.entries.length; i++){
+        if(platforms.children.entries[i].x < -10){
+            platforms.children.entries[i].x = 800;
+            platforms.children.entries[i].y = Math.random()*600 + 150;
         }
     }
     
