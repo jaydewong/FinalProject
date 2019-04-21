@@ -131,16 +131,19 @@ function update ()
             player.anims.play('idle');
         }
 
-        if (cursors.up.isDown)
-        {
-            player.setVelocityY(-250);
-        }
+        // if (cursors.up.isDown)
+        // {
+        //     player.setVelocityY(-250);
+        // }
 
         
     for(var i = 0; i < platforms.children.entries.length; i++){
         if(platforms.children.entries[i].x < -10){
             platforms.children.entries[i].x = 800;
             platforms.children.entries[i].y = Math.random()*600 + 150;
+        }
+        if(platforms.children.entries[i].y - player.y < 5 && cursors.up.isDown){ //check asteroid for the distance thing its not working 
+            player.setVelocityY(-450);
         }
     }
     
