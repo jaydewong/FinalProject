@@ -52,6 +52,7 @@ function update ()
 function create ()
 
 {   
+    this.physics.world.setBoundsCollision(true,true,true,false);
     this.add.image(400, 300, 'sky').setScale(3);
 
     coins = this.physics.add.staticGroup();
@@ -63,8 +64,11 @@ function create ()
 
     });
     platforms.create(600, 500, 'ground').setScale(0.75);
-    platforms.create(200, 350, 'ground').setScale(0.75);
+    platforms.create(200, 350, 'ground').setScale(0.5);
     platforms.create(850, 420, 'ground').setScale(0.75);
+    platforms.create(400, 100, 'ground').setScale(0.5);
+    platforms.create(700, 300, 'ground').setScale(0.75);
+    platforms.create(690, 550, 'ground').setScale(0.5);
     platforms.create(400, 100, 'ground').setScale(0.75);
     
     coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
@@ -74,13 +78,16 @@ function create ()
 
     player = this.physics.add.sprite(100,300,'player');
     player.setBounce(0.2);
+    this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
+
+     
+
     player.body.setGravityY(400);
 
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    this.physics.add.collider(player, platforms);
 
     this.anims.create({
         key: 'walk',
@@ -110,7 +117,10 @@ function create ()
 
 function update ()
 {
-    
+    // console.log(player.x + ',' + player.y);
+    if(player.y > 600){
+        this.scene.restart();
+    }
     if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
@@ -127,7 +137,7 @@ function update ()
             player.setVelocityX(0);
             player.anims.play('idle');
         }
-
+ 
         if (cursors.up.isDown)
         {
             player.setVelocityY(-250);
@@ -137,7 +147,7 @@ function update ()
     for(var i = 0; i < platforms.children.entries.length; i++){
         if(platforms.children.entries[i].x < -10){
             platforms.children.entries[i].x = 800;
-            platforms.children.entries[i].y = Math.random()*600 + 150;
+            platforms.children.entries[i].y = Math.random()*300 + 150;
         }
     }
     
