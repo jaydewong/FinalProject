@@ -25,7 +25,8 @@ var frameView;
 var coins;
 var platforms;
 var player;
-var cursors; 
+var cursors;
+var score = 0; 
 
 
 function preload ()
@@ -142,4 +143,12 @@ function update ()
     }
     
     
+}
+
+function collectcoins (player,coins){
+    coins.disableBody (true,true);
+
+    score +=1;
+    scoreText.setText('score: ' + score);
+    console.log(score)
 }
