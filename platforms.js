@@ -68,7 +68,7 @@ function create ()
     platforms.create(850, 420, 'ground').setScale(0.75);
     platforms.create(400, 100, 'ground').setScale(0.5);
     platforms.create(700, 300, 'ground').setScale(0.75);
-    platforms.create(690, 550, 'ground').setScale(0.5);
+    platforms.create(690, 650, 'ground').setScale(0.5);
     platforms.create(400, 100, 'ground').setScale(0.75);
     
     coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
@@ -138,15 +138,15 @@ function update ()
             player.anims.play('idle');
         }
  
-        if (cursors.up.isDown)
+        if (cursors.up.isDown && player.body.touching.down)
         {
-            player.setVelocityY(-250);
+            player.setVelocityY(-550);
         }
 
         
     for(var i = 0; i < platforms.children.entries.length; i++){
-        if(platforms.children.entries[i].x < -10){
-            platforms.children.entries[i].x = 800;
+        if(platforms.children.entries[i].x < -30){
+            platforms.children.entries[i].x = 850;
             platforms.children.entries[i].y = Math.random()*300 + 150;
         }
     }
