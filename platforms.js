@@ -73,7 +73,7 @@ function create ()
     platforms.create(400, 100, 'ground').setScale(0.75);
 
     for(var i = 0; i < Math.random()*9; i++){
-        coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+        coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();
     }
     
     // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
