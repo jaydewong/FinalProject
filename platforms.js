@@ -160,6 +160,7 @@ function update ()
     
     
 }
+
 function collectcoins (player,coins)
 {
     coins.disableBody (true,true);
