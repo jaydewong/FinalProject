@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: true
+            debug: false
         }
     },
     scene: {
@@ -78,7 +78,6 @@ function create ()
     coins.create(750, 160, 'coin').setScale(1.5).refreshBody();;
     
     player = this.physics.add.sprite(100,300,'player');
-    player.setBounce(0.2);
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
 
@@ -111,6 +110,7 @@ function create ()
         yoyo: true,
         repeat: -1
     });
+
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     coins.playAnimation('spin');
     this.physics.add.collider(coins, platforms);
@@ -122,6 +122,7 @@ function update ()
 {
     // console.log(player.x + ',' + player.y);
     if(player.y > 600){
+        score = 0;
         this.scene.restart();
     }
     if (cursors.left.isDown)
@@ -148,14 +149,15 @@ function update ()
 
         
     for(var i = 0; i < platforms.children.entries.length; i++){
-        if(platforms.children.entries[i].x < -30){
-            platforms.children.entries[i].x = 850;
+        if(platforms.children.entries[i].x < -100){
+            platforms.children.entries[i].x = 900;
             platforms.children.entries[i].y = Math.random()*300 + 150;
         }
     }
     
     
 }
+
 function collectcoins (player,coins)
 {
     coins.disableBody (true,true);
