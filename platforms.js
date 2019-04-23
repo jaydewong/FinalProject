@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: true
+            debug: false
         }
     },
     scene: {
@@ -25,7 +25,8 @@ var frameView;
 var coins;
 var platforms;
 var player;
-var cursors; 
+var cursors;
+var score = 0; 
 
 
 function preload ()
@@ -70,14 +71,17 @@ function create ()
     platforms.create(700, 300, 'ground').setScale(0.75);
     platforms.create(690, 650, 'ground').setScale(0.5);
     platforms.create(400, 100, 'ground').setScale(0.75);
+
+    for(var i = 0; i < Math.random()*9; i++){
+        coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    }
     
-    coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
-    coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
-    coins.create(50, 190, 'coin').setScale(1.5).refreshBody();;
-    coins.create(750, 160, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
 
     player = this.physics.add.sprite(100,300,'player');
-    player.setBounce(0.2);
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
 
@@ -111,7 +115,10 @@ function create ()
         repeat: -1
     });
 
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     coins.playAnimation('spin');
+    this.physics.add.collider(coins, platforms);
+    this.physics.add.overlap(player, coins, collectcoins, null, this);
 }
 
 
@@ -119,16 +126,21 @@ function update ()
 {
     // console.log(player.x + ',' + player.y);
     if(player.y > 600){
+        score = 0;
         this.scene.restart();
     }
     if (cursors.left.isDown)
         {
-            player.setVelocityX(-160);
+<<<<<<< HEAD
+            player.setVelocityX(-210);
+=======
+            player.setVelocityX(-200);
+>>>>>>> c4712743f489793d10135665acbf381e10ceee20
             player.anims.play('walk', true);
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(160);
+            player.setVelocityX(210);
             player.anims.play('walk', true);
 
         }
@@ -145,11 +157,19 @@ function update ()
 
         
     for(var i = 0; i < platforms.children.entries.length; i++){
-        if(platforms.children.entries[i].x < -30){
-            platforms.children.entries[i].x = 850;
+        if(platforms.children.entries[i].x < -100){
+            platforms.children.entries[i].x = 900;
             platforms.children.entries[i].y = Math.random()*300 + 150;
         }
     }
     
     
+}
+
+function collectcoins (player,coins)
+{
+    coins.disableBody (true,true);
+    score += 1;
+    scoreText.setText('score:' + score);
+    console.log(score);
 }
