@@ -59,8 +59,8 @@ function create ()
     coins = this.physics.add.staticGroup();
 
     platforms = this.physics.add.group({
-        gravityY:-300,
-        velocityX: -200,
+        gravityY: -300,
+        velocityX: -180,
         'immovable': true,
 
     });
@@ -131,16 +131,12 @@ function update ()
     }
     if (cursors.left.isDown)
         {
-<<<<<<< HEAD
-            player.setVelocityX(-210);
-=======
             player.setVelocityX(-200);
->>>>>>> c4712743f489793d10135665acbf381e10ceee20
             player.anims.play('walk', true);
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(210);
+            player.setVelocityX(200);
             player.anims.play('walk', true);
 
         }
