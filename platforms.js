@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: false
+            debug: true
         }
     },
     scene: {
@@ -59,8 +59,8 @@ function create ()
     coins = this.physics.add.staticGroup();
 
     platforms = this.physics.add.group({
-        gravityY:-300,
-        velocityX: -200,
+        gravityY: -300,
+        velocityX: -180,
         'immovable': true,
 
     });
@@ -76,12 +76,13 @@ function create ()
         coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();
     }
     
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
+    coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
+    coins.create(50, 190, 'coin').setScale(1.5).refreshBody();;
+    coins.create(750, 160, 'coin').setScale(1.5).refreshBody();;
 
     player = this.physics.add.sprite(100,300,'player');
+    player.setBounce(0.2);
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
 
@@ -114,7 +115,6 @@ function create ()
         yoyo: true,
         repeat: -1
     });
-
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     coins.playAnimation('spin');
     this.physics.add.collider(coins, platforms);
@@ -126,7 +126,6 @@ function update ()
 {
     // console.log(player.x + ',' + player.y);
     if(player.y > 600){
-        score = 0;
         this.scene.restart();
     }
     if (cursors.left.isDown)
@@ -136,7 +135,7 @@ function update ()
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(160);
+            player.setVelocityX(200);
             player.anims.play('walk', true);
 
         }
@@ -153,15 +152,14 @@ function update ()
 
         
     for(var i = 0; i < platforms.children.entries.length; i++){
-        if(platforms.children.entries[i].x < -100){
-            platforms.children.entries[i].x = 900;
+        if(platforms.children.entries[i].x < -30){
+            platforms.children.entries[i].x = 850;
             platforms.children.entries[i].y = Math.random()*300 + 150;
         }
     }
     
     
 }
-
 function collectcoins (player,coins)
 {
     coins.disableBody (true,true);
