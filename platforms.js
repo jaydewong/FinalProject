@@ -110,6 +110,7 @@ function create ()
         yoyo: true,
         repeat: -1
     });
+
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     coins.playAnimation('spin');
     this.physics.add.collider(coins, platforms);
@@ -121,6 +122,7 @@ function update ()
 {
     // console.log(player.x + ',' + player.y);
     if(player.y > 600){
+        score = 0;
         this.scene.restart();
     }
     if (cursors.left.isDown)
@@ -155,6 +157,7 @@ function update ()
     
     
 }
+
 function collectcoins (player,coins)
 {
     coins.disableBody (true,true);
