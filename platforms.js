@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: true
+            debug: false
         }
     },
     scene: {
@@ -77,7 +77,6 @@ function create ()
     coins.create(750, 160, 'coin').setScale(1.5).refreshBody();;
 
     player = this.physics.add.sprite(100,300,'player');
-    player.setBounce(0.2);
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
 
@@ -145,8 +144,8 @@ function update ()
 
         
     for(var i = 0; i < platforms.children.entries.length; i++){
-        if(platforms.children.entries[i].x < -30){
-            platforms.children.entries[i].x = 850;
+        if(platforms.children.entries[i].x < -100){
+            platforms.children.entries[i].x = 900;
             platforms.children.entries[i].y = Math.random()*300 + 150;
         }
     }
