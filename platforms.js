@@ -76,7 +76,7 @@ function create ()
     coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
     coins.create(50, 190, 'coin').setScale(1.5).refreshBody();;
     coins.create(750, 160, 'coin').setScale(1.5).refreshBody();;
-
+    
     player = this.physics.add.sprite(100,300,'player');
     player.setBounce(0.2);
     this.physics.add.collider(player, platforms);
