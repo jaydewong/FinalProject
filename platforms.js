@@ -71,12 +71,16 @@ function create ()
     platforms.create(700, 300, 'ground').setScale(0.75);
     platforms.create(690, 650, 'ground').setScale(0.5);
     platforms.create(400, 100, 'ground').setScale(0.75);
+
+    for(var i = 0; i < Math.random()*9; i++){
+        coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    }
     
-    coins.create(400, 420, 'coin').setScale(1.5).refreshBody();;
-    coins.create(600, 340, 'coin').setScale(1.5).refreshBody();;
-    coins.create(50, 190, 'coin').setScale(1.5).refreshBody();;
-    coins.create(750, 160, 'coin').setScale(1.5).refreshBody();;
-    
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
+
     player = this.physics.add.sprite(100,300,'player');
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
@@ -127,7 +131,11 @@ function update ()
     }
     if (cursors.left.isDown)
         {
+<<<<<<< HEAD
             player.setVelocityX(-210);
+=======
+            player.setVelocityX(-200);
+>>>>>>> c4712743f489793d10135665acbf381e10ceee20
             player.anims.play('walk', true);
         }
         else if (cursors.right.isDown)
