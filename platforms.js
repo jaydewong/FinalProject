@@ -131,7 +131,7 @@ function update ()
     }
     if (cursors.left.isDown)
         {
-            player.setVelocityX(-160);
+            player.setVelocityX(-200);
             player.anims.play('walk', true);
         }
         else if (cursors.right.isDown)
