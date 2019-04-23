@@ -25,7 +25,8 @@ var frameView;
 var coins;
 var platforms;
 var player;
-var cursors; 
+var cursors;
+var score = 0; 
 
 
 function preload ()
@@ -109,8 +110,10 @@ function create ()
         yoyo: true,
         repeat: -1
     });
-
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     coins.playAnimation('spin');
+    this.physics.add.collider(coins, platforms);
+    this.physics.add.overlap(player, coins, collectcoins, null, this);
 }
 
 
@@ -151,4 +154,11 @@ function update ()
     }
     
     
+}
+function collectcoins (player,coins)
+{
+    coins.disableBody (true,true);
+    score += 1;
+    scoreText.setText('score:' + score);
+    console.log(score);
 }
