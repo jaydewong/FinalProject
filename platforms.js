@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: false
+            debug: true
         }
     },
     scene: {
@@ -26,7 +26,8 @@ var coins;
 var platforms;
 var player;
 var cursors;
-var score = 0; 
+var score = 0;
+var highscore = 0; 
 
 
 function preload ()
@@ -55,6 +56,8 @@ function create ()
 {   
     this.physics.world.setBoundsCollision(true,true,true,false);
     this.add.image(400, 300, 'sky').setScale(3);
+    highscoreText = this.add.text(16, 8, 'score: 0', { fontSize: '17px', fill: '#000' });
+    highscoreText.setText('highest score: ' + highscore);
 
     coins = this.physics.add.staticGroup();
 
@@ -72,15 +75,10 @@ function create ()
     platforms.create(690, 650, 'ground').setScale(0.5);
     platforms.create(400, 100, 'ground').setScale(0.75);
 
-    for(var i = 0; i < Math.random()*9; i++){
-        coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();
+    for(var i = 0; i < Math.random()*10 + 2; i++){
+        coins.create(Math.random()*800, Math.random()*500, 'coin').setScale(1.5).refreshBody();
     }
     
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-    // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
-
     player = this.physics.add.sprite(100,300,'player');
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
@@ -115,7 +113,7 @@ function create ()
         repeat: -1
     });
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 30, 'score: 0', { fontSize: '32px', fill: '#000' });
     coins.playAnimation('spin');
     this.physics.add.collider(coins, platforms);
     this.physics.add.overlap(player, coins, collectcoins, null, this);
@@ -126,6 +124,9 @@ function update ()
 {
     // console.log(player.x + ',' + player.y);
     if(player.y > 600){
+        if(score > highscore){
+            highscore = score;
+        }
         score = 0;
         this.scene.restart();
     }
@@ -165,9 +166,14 @@ function update ()
 function collectcoins (player,coin)
 {
     coin.disableBody (true,true);
+    coins.remove(coin);
     score += 1;
-    scoreText.setText('score:' + score);
-    console.log(score);
+    for(var i = 1; i < Math.random()*4; i++){
+        coins.create(Math.random()*800, Math.random()*500, 'coin').setScale(1.5).refreshBody();
+        coins.playAnimation('spin');
+    }
 
+    scoreText.setText('score:' + score);
 
 }
+
