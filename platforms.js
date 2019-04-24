@@ -134,7 +134,8 @@ function update ()
             highscore = score;
         }
         score = 0;
-        this.scene.restart();
+        this.scene.stop();
+        this.scene.start('lose');
     }
     if (cursors.left.isDown)
         {
@@ -183,3 +184,17 @@ function collectcoins (player,coin)
 
 }
 
+game.scene.add('lose', {
+    create: function() {
+        console.log('lose scene create');
+        this.add.text(16, 30, 'You Lose', { fontSize: '32px', fill: '#fff' });
+
+        let restartButton = this.add.text(16, 60, 'Play Again', { fontSize: '32px', fill: '#fff' });
+        restartButton.setInteractive();
+        let game = this;
+        restartButton.on('pointerdown', function() {
+            game.scene.stop();
+            game.scene.start('default');
+        });
+    }
+});
