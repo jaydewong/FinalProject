@@ -98,7 +98,13 @@ function create ()
         yoyo: true,
         repeat: -1
     });
-    
+    this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('player'),
+        frameRate: 18,
+        yoyo: true,
+        repeat: -1
+    });
     this.anims.create({
         key: 'idle',
         frames: [{ key: 'player', frame: 0}],
@@ -133,7 +139,7 @@ function update ()
     if (cursors.left.isDown)
         {
             player.setVelocityX(-200);
-            player.anims.play('walk', true);
+            player.anims.play('left', true);
         }
         else if (cursors.right.isDown)
         {
