@@ -162,10 +162,12 @@ function update ()
     
 }
 
-function collectcoins (player,coins)
+function collectcoins (player,coin)
 {
-    coins.disableBody (true,true);
+    coin.disableBody (true,true);
     score += 1;
     scoreText.setText('score:' + score);
     console.log(score);
+
+
 }
