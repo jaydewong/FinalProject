@@ -187,7 +187,8 @@ function collectcoins (player,coin)
 game.scene.add('lose', {
     create: function() {
         console.log('lose scene create');
-        this.add.text(20, 40, 'You Lose!', { fontSize: '100px', fill: '#fff' });
+        this.add.image(400,300, 'sky').setScale(3);
+        this.add.text(150, 200, 'You Lose!', { fontSize: '100px', fill: '#fff' });
 
         let restartButton = this.add.text(500, 500, 'Play Again', { fontSize: '32px', fill: '#fff' });
         restartButton.setInteractive();
