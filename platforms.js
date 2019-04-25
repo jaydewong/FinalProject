@@ -131,7 +131,7 @@ function create ()
 
 function update ()
 {
-    // console.log(player.x + ',' + player.y);
+
     if(player.y > 600){
         if(score > highscore){
             highscore = score;
