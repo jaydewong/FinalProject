@@ -35,8 +35,8 @@ function preload ()
     this.load.image('sky', 'background.png');
     this.load.image('ground', 'fixedground.png');
 
-    this.load.spritesheet('left', 'pusheen1.png', { frameWidth: 46, frameHeight: 28 });
-    this.load.spritesheet('right', 'pusheen2.png', { frameWidth: 46, frameHeight: 28 });
+    this.load.spritesheet('left', 'Pusheen1.png', { frameWidth: 46, frameHeight: 28 });
+    this.load.spritesheet('right', 'Pusheen2.png', { frameWidth: 46, frameHeight: 28 });
     this.load.spritesheet('coin', 'Coin1.png', { frameWidth: 13, frameHeight: 13 });
 }
 
