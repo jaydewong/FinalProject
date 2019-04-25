@@ -34,6 +34,7 @@ function preload ()
 {
     this.load.image('sky', 'background.png');
     this.load.image('ground', 'fixedground.png');
+
     this.load.spritesheet('left', 'pusheen1.png', { frameWidth: 46, frameHeight: 28 });
     this.load.spritesheet('right', 'pusheen2.png', { frameWidth: 46, frameHeight: 28 });
     this.load.spritesheet('coin', 'Coin1.png', { frameWidth: 13, frameHeight: 13 });
@@ -103,13 +104,6 @@ function create ()
     this.anims.create({
         key: 'right',
         frames: this.anims.generateFrameNumbers('right'),
-        frameRate: 18,
-        yoyo: true,
-        repeat: -1
-    });
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('left'),
         frameRate: 18,
         yoyo: true,
         repeat: -1
