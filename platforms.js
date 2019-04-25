@@ -33,7 +33,8 @@ function preload ()
 {
     this.load.image('sky', 'background.png');
     this.load.image('ground', 'fixedground.png');
-    this.load.spritesheet('player', 'Pusheen1.png', { frameWidth: 46, frameHeight: 28 });
+    this.load.spritesheet('player1', 'pusheen1.png', { frameWidth: 46, frameHeight: 28 });
+    this.load.spritesheet('player2', 'pusheen2.png', { frameWidth: 46, frameHeight: 28 });
     this.load.spritesheet('coin', 'Coin1.png', { frameWidth: 13, frameHeight: 13 });
 }
 
@@ -81,7 +82,7 @@ function create ()
     // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
     // coins.create(Math.random()*800, Math.random()*600, 'coin').setScale(1.5).refreshBody();;
 
-    player = this.physics.add.sprite(100,300,'player');
+    player = this.physics.add.sprite(100,300,'player1');
     this.physics.add.collider(player, platforms);
     player.setCollideWorldBounds(true);
 
@@ -94,8 +95,16 @@ function create ()
 
 
     this.anims.create({
-        key: 'walk',
-        frames: this.anims.generateFrameNumbers('player'),
+        key: 'walk1',
+        frames: this.anims.generateFrameNumbers('player1'),
+        frameRate: 18,
+        yoyo: true,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'walk2',
+        frames: this.anims.generateFrameNumbers('player2'),
         frameRate: 18,
         yoyo: true,
         repeat: -1
@@ -103,7 +112,7 @@ function create ()
     
     this.anims.create({
         key: 'idle',
-        frames: [{ key: 'player', frame: 0}],
+        frames: [{ key: 'player2', frame: 0}],
         frameRate: 18,
     });
 
@@ -132,12 +141,12 @@ function update ()
     if (cursors.left.isDown)
         {
             player.setVelocityX(-200);
-            player.anims.play('walk', true);
+            player.anims.play('walk1', true);
         }
         else if (cursors.right.isDown)
         {
             player.setVelocityX(200);
-            player.anims.play('walk', true);
+            player.anims.play('walk2', true);
 
         }
         else
@@ -162,9 +171,9 @@ function update ()
     
 }
 
-function collectcoins (player,coins)
+function collectcoins (player,coin)
 {
-    coins.disableBody (true,true);
+    coin.disableBody (true,true);
     score += 1;
     scoreText.setText('score:' + score);
     console.log(score);
