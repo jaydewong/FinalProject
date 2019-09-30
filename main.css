@@ -8,3 +8,13 @@
 body { 
     background-color: darkgrey;
 }
+
+#game {
+  position:absolute;
+  width:800px;
+  height:600px;
+  top:50%;
+  left:50%;
+  margin-top:400px; /*half of the height*/
+  margin-left:300px; /*half of the width*/
+}
